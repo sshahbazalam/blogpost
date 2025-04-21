@@ -26,7 +26,7 @@ class BlogPostController extends Controller
      */
     public function index(Request $request)
     {
-        $blogposts = $this->blogPostService->paginateBlogPosts(5, $request->query());
+        $blogposts = $this->blogPostService->getAllBlogpostPaginated($request->query());
         return view('blog-posts.index', compact('blogposts'));
     }
 

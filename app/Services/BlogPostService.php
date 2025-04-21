@@ -11,7 +11,7 @@ class BlogPostService
     /**
      * Get Authors using pagination
      */
-    public function paginateBlogPosts(int $perPage = 5, array $filters)
+    public function getAllBlogpostPaginated(array $filters)
     {
         $query = BlogPost::query();
 
@@ -23,6 +23,7 @@ class BlogPostService
             }
         }
 
+        $perPage = isset($filters['per_page'])? $filters['per_page'] : 10;
         return $blogPosts = $query->latest()->paginate($perPage)->appends($filters);
     }
 

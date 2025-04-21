@@ -9,7 +9,7 @@ class AuthorService
     /**
      * Get Authors using pagination
      */
-    public function paginateAuthors(int $perPage = 5)
+    public function getAllAuthorsPaginated(int $perPage = 10): mixed
     {
         return Author::latest()->paginate($perPage);
     }
@@ -18,11 +18,22 @@ class AuthorService
      * Store Author in table
      * 
      * @param array $data
-     * @return array $author
+     * @return Author
      */
     public function createAuthor(array $data): Author
     {
         return Author::create($data);
+    }
+
+    /**
+     * Get Author by Id
+     * 
+     * @param int $id
+     * @return Author
+     */
+    public function getAuthorById(int $id): Author
+    {
+        return Author::findOrFail($id);
     }
 
     /**
@@ -38,6 +49,20 @@ class AuthorService
     }
 
     /**
+     * Update Author by Id
+     * 
+     * @param int $id author id
+     * @param array $data data is going to update
+     * @return Author
+     */
+    public function updateAuthorById(int $id, array $data): Author
+    {
+        $author = Author::findOrFail($id);
+        $author->update($data);
+        return $author;
+    }
+
+    /**
      * Delete Author
      * 
      * @param Author $author
@@ -46,5 +71,18 @@ class AuthorService
     public function deleteAuthor(Author $author): bool
     {
         return $author->delete();
+    }
+
+    /**
+     * Delete Author by id
+     * 
+     * @param $id author id
+     * @return bool 
+     */
+    public function deleteAuthorById(int $id): bool
+    {
+        $author = Author::findOrFail($id);
+        $author->delete();
+        return true;
     }
 }

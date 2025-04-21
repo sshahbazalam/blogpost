@@ -7,6 +7,7 @@ use App\Services\AuthorService;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -22,10 +23,23 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $authors = $this->authorService->paginateAuthors(5);
-        return view('authors.index', compact('authors'));
+        try {
+            $perPage = $request->query('per_page', 10);
+            $authors = $this->authorService->getAllAuthorsPaginated($perPage);
+            //Return response
+            return view('authors.index', compact('authors'));
+        } catch (\Throwable $th) {
+            // Log the error (important for debugging)
+            Log::error('Error getting author', [
+                'message' => $th->getMessage(),
+                'stack' => $th->getTraceAsString(),
+            ]);
+            //Return response
+            return back()
+                ->with('error', 'Something went wrong while getting the authors.');
+        }
     }
 
     /**
