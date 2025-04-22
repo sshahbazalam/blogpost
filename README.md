@@ -1,185 +1,203 @@
- Once you clone this repository**
- Do the following commands to make this application works
- 
- Step1:- cd your-laravel-project
- 
- Step2:- composer install
- 
- Step3:- cp .env.example .env
- 
- Step4:- php artisan key:generate
- 
- Step5:- Setup your database if you don't want sqllite
- 
- Step6:- php artisan migrate --seed
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Starter Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 0.2rem;
+            border-radius: 5px;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .note {
+            background-color: #e7f7d4;
+            padding: 10px;
+            border-left: 4px solid #4caf50;
+            margin-bottom: 20px;
+        }
+        .important {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .api-example {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
 
- Step7:- npm install
+    <h1>📘 Laravel Starter Project</h1>
 
- Step8:- npm run dev
+    <h2>🔧 Getting Started</h2>
+    <p>After cloning the repository, follow these steps to get the application up and running:</p>
 
- Step9:- php artisan storage:link
- 
- Step10:- php artisan serve
- 
- For Login on web and getting token on API use below credentials
-  
-  1)Login API
-    POST Url = {baseUrl}.api/login
-  {
-     'email' => 'test@example.com'
-	 'password' => 'password'
-  }
-    Response : - 
-  {
-    "status": "success",
-    "message": "token_created",
-    "data": {
-        "token": "2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81"
-    },
-    "errors": null
-  }
+    <pre><code># Step 1: Go to the project directory
+cd your-laravel-project
 
-  We can add column token expires_at too like Laravel passport has
-  
-  2) Logout token user
-     POST Url = {baseUrl}.api/logout
-	 Header = Authorization: Bearer 2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81
-	 
-	 Response :- 	 
-	 {
-		"status": "success",
-		"message": "logged_out",
-		"data": null,
-		"errors": null
-	 }
-  
-  3) Get all Authors with pagination
-     GET Url = {baseUrl}.api/authors`
-	 Header = Authorization: Bearer 2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81
-	 
-	 Response :- 	 
-	 {
-    "status": "success",
-    "message": "authors_retrieved",
-    "data": {
-        "current_page": 1,
-        "data": [
-            {
-                "id": 10,
-                "name": "Dr. Stanford Homenick MD",
-                "email": "kassulke.reba@heller.info",
-                "bio": "Voluptates voluptates est sed ut. Et quidem sit et iste quas nostrum in nisi. Nemo sapiente cum ut ad hic corrupti laborum.",
-                "created_at": "2025-04-21T10:17:24.000000Z",
-                "updated_at": "2025-04-21T10:17:24.000000Z"
-            },
-	 }
-	 }
-  
-  4) Get Author by Author Id
-     GET Url = {baseUrl}.api/authors/$id`
-	 Header = Authorization: Bearer 2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81
-	 
-	 Response :- 	 
-	 {
-    "status": "success",
-    "message": "author_retrieved",
-    "data": {
-        "id": 10,
-        "name": "Dr. Stanford Homenick MD",
-        "email": "kassulke.reba@heller.info",
-        "bio": "Voluptates voluptates est sed ut. Et quidem sit et iste quas nostrum in nisi. Nemo sapiente cum ut ad hic corrupti laborum.",
-        "created_at": "2025-04-21T10:17:24.000000Z",
-        "updated_at": "2025-04-21T10:17:24.000000Z"
-    },
-    "errors": null
-    }
-	
-  5) Create Author 
-     POST Url = {baseUrl}.api/authors`
-	 Header = Authorization: Bearer 2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81
-	 
-	 Request :- 
-	 
-	  {
-            'name' => ['required', 'string','max:45'],
-            'email' => ['required', 'email', 'unique:authors'],
-            'bio' => ['nullable', 'string', 'max:1000']
-        };
-	 
-	 
-	 Response :- 	 
-	 {
-    "status": "success",
-    "message": "author_retrieved",
-    "data": {
-        "id": 10,
-        "name": "Dr. Stanford Homenick MD",
-        "email": "kassulke.reba@heller.info",
-        "bio": "Voluptates voluptates est sed ut. Et quidem sit et iste quas nostrum in nisi. Nemo sapiente cum ut ad hic corrupti laborum.",
-        "created_at": "2025-04-21T10:17:24.000000Z",
-        "updated_at": "2025-04-21T10:17:24.000000Z"
-    },
-    "errors": null
-    }
-  
-  6) Update Author 
-     PUT Url = {baseUrl}.api/authors/$id
-	 Header = Authorization: Bearer 2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81
-	 
-	 Request :- 
-	 
-	  {
-            'name' => ['nullable', 'string', 'max:45', 'required_without_all:email,bio'],
-            'email' => ['nullable', 'email', 'unique:authors,email,' . $this->route('author'), 'required_without_all:name,bio'],
-            'bio' => ['nullable', 'string', 'max:1000', 'required_without_all:name,email']
-        };
-	 
-	 
-	 Response :- 	 
-	 {
-    "status": "success",
-    "message": "author_updated",
-    "data": {
-        "id": 1,
-        "name": "Test2",
-        "email": "test2@gmail.com",
-        "bio": "Error adipisci deserunt reiciendis. Aut repellat sequi voluptatem aut neque facere dolorum et. Molestias temporibus impedit libero tempora tempore velit. Ut atque et et voluptates et.",
-        "created_at": "2025-04-21T10:17:23.000000Z",
-        "updated_at": "2025-04-21T11:08:50.000000Z"
-    },
-    "errors": null
-}
+# Step 2: Install PHP dependencies
+composer install
 
-   7) Delete Author 
-     Delete Url = {baseUrl}.api/authors/$id
-	 Header = Authorization: Bearer 2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81
-	 
-	 
-	 
-	 Response :- 	 
-	 {
-    "status": "success",
-    "message": "author_deleted",
-    "data": [],
-    "errors": null
-    }
-	
-	The follwing topics and features, I have covered in this application
-	Blade starter kit Installed
-	Relational table created using foreign key
-	Default data and test data added using seeders and factories
-	Relationalship hasMany and belongsTo added on Author and blogpost model
-	Softdelete added for blog post
-	Image upload added for blog post
-	Scope filter added for published and unpublished posts
-	Pagination added for all records of author and blogpost
-	CRUD APis added for author
-	Token based logged in added
-	
-	Model wise Formrequest and policy has been created for handling validation and authorazation.
- Services has been created for handling logic and db operation so our controller would be clean.
- On controller using try catch block to handle operation because service can throw exception while doing db operation
- so if error occurs we genenerate user-friendly response to the user
- and we also store exception on log for handling debug in production and we can even shoot mail to support team as well.
- 
- This project mainly focus on features not much on UI. I guess I cover every aspects of Laravel
+# Step 3: Copy environment file
+cp .env.example .env
+
+# Step 4: Generate application key
+php artisan key:generate
+
+# Step 5: Configure your database in the `.env` file
+# (Skip this if you want to use SQLite)
+
+# Step 6: Run migrations and seed the database
+php artisan migrate --seed
+
+# Step 7: Install Node dependencies
+npm install
+
+# Step 8: Compile assets
+npm run dev
+
+# Step 9: Create symbolic link for storage
+php artisan storage:link
+
+# Step 10: Start the development server
+php artisan serve
+    </code></pre>
+
+    <h2>🔐 Authentication</h2>
+
+    <h3>1. Login (API)</h3>
+    <p><strong>Endpoint:</strong> <code>POST {baseUrl}/api/login</code></p>
+    <p><strong>Payload:</strong></p>
+    <pre><code>{
+  "email": "test@example.com",
+  "password": "password"
+}</code></pre>
+    <p><strong>Response:</strong></p>
+    <pre><code>{
+  "status": "success",
+  "message": "token_created",
+  "data": {
+    "token": "2|AyD5V03VRLjUW1Z9F5BmNpQwehHtW81fzA4XtIG12cbeee81"
+  },
+  "errors": null
+}</code></pre>
+
+    <div class="note">
+        <p><strong>Note:</strong> You can optionally add a <code>token_expires_at</code> field like Laravel Passport does.</p>
+    </div>
+
+    <h3>2. Logout (API)</h3>
+    <p><strong>Endpoint:</strong> <code>POST {baseUrl}/api/logout</code></p>
+    <p><strong>Headers:</strong></p>
+    <pre><code>Authorization: Bearer {your_token}</code></pre>
+    <p><strong>Response:</strong></p>
+    <pre><code>{
+  "status": "success",
+  "message": "logged_out",
+  "data": null,
+  "errors": null
+}</code></pre>
+
+    <h2>📚 Author Management (API)</h2>
+
+    <h3>3. Get All Authors (Paginated)</h3>
+    <p><strong>Endpoint:</strong> <code>GET {baseUrl}/api/authors</code></p>
+    <p><strong>Headers:</strong></p>
+    <pre><code>Authorization: Bearer {your_token}</code></pre>
+
+    <h3>4. Get Author by ID</h3>
+    <p><strong>Endpoint:</strong> <code>GET {baseUrl}/api/authors/{id}</code></p>
+    <p><strong>Headers:</strong></p>
+    <pre><code>Authorization: Bearer {your_token}</code></pre>
+
+    <h3>5. Create Author</h3>
+    <p><strong>Endpoint:</strong> <code>POST {baseUrl}/api/authors</code></p>
+    <p><strong>Headers:</strong></p>
+    <pre><code>Authorization: Bearer {your_token}</code></pre>
+    <p><strong>Request:</strong></p>
+    <pre><code>{
+  "name": "required|string|max:45",
+  "email": "required|email|unique:authors",
+  "bio": "nullable|string|max:1000"
+}</code></pre>
+
+    <h3>6. Update Author</h3>
+    <p><strong>Endpoint:</strong> <code>PUT {baseUrl}/api/authors/{id}</code></p>
+    <p><strong>Headers:</strong></p>
+    <pre><code>Authorization: Bearer {your_token}</code></pre>
+    <p><strong>Request:</strong></p>
+    <pre><code>{
+  "name": "nullable|string|max:45|required_without_all:email,bio",
+  "email": "nullable|email|unique:authors,email,{id}|required_without_all:name,bio",
+  "bio": "nullable|string|max:1000|required_without_all:name,email"
+}</code></pre>
+
+    <h3>7. Delete Author</h3>
+    <p><strong>Endpoint:</strong> <code>DELETE {baseUrl}/api/authors/{id}</code></p>
+    <p><strong>Headers:</strong></p>
+    <pre><code>Authorization: Bearer {your_token}</code></pre>
+    <p><strong>Response:</strong></p>
+    <pre><code>{
+  "status": "success",
+  "message": "author_deleted",
+  "data": [],
+  "errors": null
+}</code></pre>
+
+    <h2>✅ Features Covered</h2>
+    <ul>
+        <li>✔️ Blade starter kit installed</li>
+        <li>✔️ Relational tables with foreign keys</li>
+        <li>✔️ Seeders and factories for default/test data</li>
+        <li>✔️ `hasMany` and `belongsTo` relationships (Author ↔ BlogPost)</li>
+        <li>✔️ Soft deletes for blog posts</li>
+        <li>✔️ Image upload support for blog posts</li>
+        <li>✔️ Scope filters for published/unpublished posts</li>
+        <li>✔️ Pagination for authors and blog posts</li>
+        <li>✔️ Full CRUD APIs for authors</li>
+        <li>✔️ Token-based login system</li>
+    </ul>
+
+    <h2>🧠 Architecture & Best Practices</h2>
+    <ul>
+        <li>✅ <strong>Form Requests & Policies:</strong> Validation and authorization handled per model</li>
+        <li>✅ <strong>Service Layer:</strong> Business logic is isolated to services to keep controllers clean</li>
+        <li>✅ <strong>Error Handling:</strong> Try-catch used in controllers to manage exceptions thrown by services</li>
+        <li>✅ <strong>Logging:</strong> Errors are logged for easier debugging in production</li>
+        <li>✅ <strong>Notifications:</strong> Exceptions can trigger support emails (optional feature)</li>
+    </ul>
+
+    <div class="note">
+        <p><strong>Note:</strong> This project focuses on back-end features and architecture over UI/UX.</p>
+    </div>
+
+</body>
+</html>
